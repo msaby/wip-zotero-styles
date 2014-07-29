@@ -269,7 +269,7 @@ For reports, genre is managed in title macro-->
           </else>
         </choose>
       </if>
-      <else-if variable="report" match="none">
+      <else-if type="report" match="none">
         <text variable="genre"/>
       </else-if>
     </choose>
