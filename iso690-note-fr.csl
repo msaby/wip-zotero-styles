@@ -85,7 +85,7 @@ Patent main creator should be Zotero "assignee", which is not yet mapped against
   </macro>
   <macro name="patent-inventor">
     <names variable="author">
-      <label text-case="capitalize-first" prefix="" form="long" suffix="&#160;: "/>
+      <label text-case="capitalize-first" prefix="" form="long" suffix="&#8239;: "/>
       <name and="text" sort-separator=" " delimiter=", " delimiter-precedes-last="never">
         <name-part name="family" text-case="uppercase"/>
         <name-part name="given"/>
@@ -134,11 +134,11 @@ Patent main creator should be Zotero "assignee", which is not yet mapped against
             <text variable="title" suffix=". "/>
             <choose>
               <if type="article-journal article-magazine article-newspaper" match="none">
-                <text term="in" text-case="capitalize-first" suffix="&#160;: "/>
+                <text term="in" text-case="capitalize-first" suffix="&#8239;: "/>
               </if>
             </choose>
             <choose>
-              <if variable="container-author editor translator" match="any">
+              <if variable="container-author editor" match="any">
                 <text macro="container-responsability"/>
                 <choose>
                   <if variable="container-title event" match="any">
@@ -172,16 +172,22 @@ or   Title:Report type (if no number)
           <if variable="number">
             <choose> 
               <if variable="genre">
-                <text variable="genre" prefix="&#160;: " suffix=" n°"/>
+                <group delimiter=" ">
+                  <text variable="genre" prefix="&#8239;: "/>
+                  <text term="issue" form="short"/>
+                </group>
               </if>
               <else>
-                <text term="report" prefix="&#160;: " suffix=" n°"/>  
+                <group delimiter=" ">
+                  <text term="report" prefix="&#8239;: "/>
+                  <text term="issue" form="short"/>
+                </group>
               </else>
             </choose>
             <text variable="number"/>
           </if>
           <else-if variable="genre">
-            <text variable="genre" prefix="&#160;: "/>
+            <text variable="genre" prefix="&#8239;: "/>
           </else-if>
         </choose>
       </else-if>
@@ -264,15 +270,26 @@ For reports, genre is managed in title macro-->
     </choose>
   </macro>
   <macro name="date">
-<!-- We could display only year for books and monographs, but I'm not sure it is mandatory or important-->
-<!-- FIXME Add a way to manage uncertain dates and range date-->
+<!-- We could display only year for books and monographs, but I'm not sure it is mandatory or important
+FIXME Add a way to manage uncertain dates and range date. limit-day-ordinals-to-day-1 is defined in locale, but seems to have no effect
+-->
     <choose>
       <if variable="issued">
-        <date variable="issued">
-          <date-part name="day" suffix=" "/>
-          <date-part name="month" form="long" suffix=" "/>
-          <date-part name="year" form="long"/>
-        </date>
+        <choose>
+          <if type="article-journal">
+            <date variable="issued">
+              <date-part name="month" form="long" text-case="capitalize-first" suffix=" "/>
+              <date-part name="year" form="long"/>
+            </date>
+          </if>
+          <else>
+            <date variable="issued">
+              <date-part name="day" suffix=" "/>
+              <date-part name="month" form="long" suffix=" "/>
+              <date-part name="year" form="long"/>
+            </date>
+          </else>
+        </choose>
       </if>
       <else>
         <text term="no date" prefix="[" suffix="]"/>
@@ -430,14 +447,14 @@ Uncomment to mention the number of pages of books and monographs
     <choose>
       <if variable="URL">
         <group>
-          <text term="available at" suffix="&#160;: " text-case="capitalize-first"/>
+          <text term="available at" suffix="&#8239;: " text-case="capitalize-first"/>
           <text variable="URL"/>
         </group>
       </if>
     </choose>
   </macro>
   <macro name="archive">
-    <group delimiter="&#160;:&#160;">
+    <group delimiter="&#8239;:&#160;">
       <text variable="archive" text-case="capitalize-first"/>
       <text variable="archive_location" text-case="capitalize-first"/>
       <text variable="call-number"/>
@@ -478,7 +495,7 @@ Uncomment to mention the number of pages of books and monographs
 <!--        <text macro="edition"/> -->
         <group delimiter=", ">
           <group delimiter=". ">
-            <group delimiter="&#160;: ">
+            <group delimiter="&#8239;: ">
               <text macro="publisher-place"/>
               <text macro="publisher"/>
             </group>
@@ -521,7 +538,7 @@ Uncomment to cite collection in note
         <text macro="edition"/>
         <group delimiter=", ">
           <group delimiter=". ">
-            <group delimiter="&#160;: ">
+            <group delimiter="&#8239;: ">
               <text macro="publisher-place"/>
               <text macro="publisher"/>
             </group>
