@@ -1,4 +1,7 @@
 # Nouveaux styles CSL pour Zotero
+
+Ce projet contiendra un ou plusieurs styles CSL pour Zotero.
+
 ## iso690-note-fr
 **Description** :
 
