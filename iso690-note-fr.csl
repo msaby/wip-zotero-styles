@@ -71,7 +71,7 @@
 Patent main creator should be Zotero "assignee", which is not yet mapped against any CSL field
 -->
       </if>
-      <else-if variable="author editor translator" match="any">
+      <else-if variable="author editor" match="any">
         <choose>
           <if variable="author">
             <text macro="author"/>
@@ -79,9 +79,6 @@ Patent main creator should be Zotero "assignee", which is not yet mapped against
           <else-if variable="editor">
             <text macro="editor"/>
           </else-if>
-          <else>
-            <text macro="translator"/>
-          </else>
         </choose>
       </else-if>
     </choose>
@@ -113,7 +110,7 @@ Patent main creator should be Zotero "assignee", which is not yet mapped against
   </macro>
   <macro name="container-responsability">
     <choose>
-      <if variable="container-author editor translator" match="any">
+      <if variable="container-author editor" match="any">
         <choose>
           <if variable="container-author">
             <text macro="container-author"/>
@@ -121,9 +118,6 @@ Patent main creator should be Zotero "assignee", which is not yet mapped against
           <else-if variable="editor">
             <text macro="editor"/>
           </else-if>
-          <else>
-            <text macro="translator"/>
-          </else>
         </choose>
       </if>
     </choose>
