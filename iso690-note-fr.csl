@@ -57,11 +57,11 @@
   </macro>
   <macro name="translator">
     <names variable="translator">
-      <name and="text" name-as-sort-order="all" sort-separator=", " delimiter=", " delimiter-precedes-last="never">
+      <label text-case="capitalize-first" form="verb-short" suffix=" "/>
+      <name and="text" sort-separator=" " delimiter=", " delimiter-precedes-last="never">
         <name-part name="family" text-case="uppercase"/>
         <name-part name="given"/>
       </name>
-      <label prefix=" (" form="short" suffix=".)"/>
     </names>
   </macro>
   <macro name="responsability">
@@ -99,6 +99,7 @@ Patent main creator should be Zotero "assignee", which is not yet mapped against
         <text macro="patent-inventor"/>
       </if>
     </choose>
+    <text macro="translator"/>
   </macro>
   <macro name="container-author">
     <names variable="container-author">
@@ -474,7 +475,7 @@ Uncomment to mention the number of pages of books and monographs
         <text macro="genre"/>
 <!-- secondary-responsability : used for patent inventors -->
         <text macro="secondary-responsability"/>
-        <text macro="edition"/>
+<!--        <text macro="edition"/> -->
         <group delimiter=", ">
           <group delimiter=". ">
             <group delimiter="&#160;: ">
