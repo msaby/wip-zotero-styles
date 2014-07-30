@@ -16,27 +16,21 @@
   </info>
   <locale>
     <terms>
-      <term name="anonymous"></term>
-      <term name="no date">[s.d.]</term>
+<!-- Only terms different from those in locale-fr-FR.xml are given -->
+      <term name="no date">s.d.</term>
       <term name="no place">s.l.</term>
       <term name="no publisher">s.n.</term>
       <term name="in">dans</term>
       <term name="online">en&#160;ligne</term>
       <term name="accessed">consulté&#160;le</term>
-      <term name="retrieved">disponible</term>
-      <term name="from">à l'adresse</term>
-      <term name="volume" form="short">vol.</term>
-      <term name="issue" form="short">n&#x1D52;</term>
-      <term name="page" form="short">
-        <single>p.</single>
-        <multiple>p.</multiple>
-      </term>
+      <term name="available at">disponible à l'adresse</term>
       <term name="editor" form="short">
 <!-- Dir. (Sous la direction de) = most common term in french for editorial responsability of a collective work-->
         <single>dir.</single>
         <multiple>dir.</multiple>
       </term>
       <term name="author" form="long">
+<!-- Only used for inventors-->
         <single>inventeur</single>
         <multiple>inventeurs</multiple>
       </term>
@@ -275,7 +269,8 @@ For reports, genre is managed in title macro-->
     </choose>
   </macro>
   <macro name="date">
-<!-- We could display only year for books and monographs, but I'm not sure it is mandatory-->
+<!-- We could display only year for books and monographs, but I'm not sure it is mandatory or important-->
+<!-- FIXME Add a way to manage uncertain dates and range date-->
     <choose>
       <if variable="issued">
         <date variable="issued">
@@ -285,7 +280,7 @@ For reports, genre is managed in title macro-->
         </date>
       </if>
       <else>
-        <text term="no date"/>
+        <text term="no date" prefix="[" suffix="]"/>
       </else>
     </choose>
   </macro>
@@ -440,8 +435,7 @@ Uncomment to mention the number of pages of books and monographs
     <choose>
       <if variable="URL">
         <group>
-          <text term="retrieved" suffix=" " text-case="capitalize-first"/>
-          <text term="from" suffix="&#160;: "/>
+          <text term="available at" suffix="&#160;: " text-case="capitalize-first"/>
           <text variable="URL"/>
         </group>
       </if>
@@ -478,9 +472,11 @@ Uncomment to mention the number of pages of books and monographs
       <group delimiter=". ">
         <text macro="responsability"/>
         <text macro="title"/>
+        <group delimiter=" ">
+          <text macro="volume"/>
 <!-- volume : used for books and monographs (a volume of a multivolume book)-->
-        <text macro="volume"/>
-        <text macro="medium"/>
+          <text macro="medium"/>
+        </group>
         <text macro="genre"/>
 <!-- secondary-responsability : used for patent inventors -->
         <text macro="secondary-responsability"/>
@@ -519,9 +515,11 @@ Uncomment to cite collection in note
       <group delimiter=". ">
         <text macro="responsability"/>
         <text macro="title"/>
+        <group delimiter=" ">
+          <text macro="volume"/>
 <!-- volume : used for books and monographs (a volume of a multivolume book)-->
-        <text macro="volume"/>
-        <text macro="medium"/>
+          <text macro="medium"/>
+        </group>
         <text macro="genre"/>
 <!-- secondary-responsability : used for patent inventors -->
         <text macro="secondary-responsability"/>
