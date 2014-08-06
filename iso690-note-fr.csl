@@ -17,9 +17,6 @@
   <locale>
     <terms>
 <!-- Only terms different from those in locale-fr-FR.xml are given -->
-      <term name="no date">s.d.</term>
-      <term name="no place">s.l.</term>
-      <term name="no publisher">s.n.</term>
       <term name="in">dans</term>
       <term name="online">en&#160;ligne</term>
       <term name="accessed">consulté&#160;le</term>
@@ -29,13 +26,6 @@
         <single>dir.</single>
         <multiple>dir.</multiple>
       </term>
-      <term name="author" form="long">
-<!-- Only used for inventors-->
-        <single>inventeur</single>
-        <multiple>inventeurs</multiple>
-      </term>
-      <term name="report">Rapport</term>
-      <term name="map_genre">carte</term>
     </terms>
   </locale>
   <macro name="author">
@@ -84,8 +74,8 @@ Patent main creator should be Zotero "assignee", which is not yet mapped against
     </choose>
   </macro>
   <macro name="patent-inventor">
+    <text value="Inventeur(s)" suffix="&#8239;: "/>
     <names variable="author">
-      <label text-case="capitalize-first" prefix="" form="long" suffix="&#8239;: "/>
       <name and="text" sort-separator=" " delimiter=", " delimiter-precedes-last="never">
         <name-part name="family" text-case="uppercase"/>
         <name-part name="given"/>
@@ -125,10 +115,7 @@ Patent main creator should be Zotero "assignee", which is not yet mapped against
   </macro>
   <macro name="title">
     <choose>
-      <if type="book thesis map motion_picture song manuscript" match="any">
-        <text variable="title" font-style="italic"/>
-      </if>
-      <else-if type="paper-conference speech chapter article-journal article-magazine article-newspaper post-weblog post webpage broadcast" match="any">
+      <if type="paper-conference speech chapter article-journal article-magazine article-newspaper post-weblog post webpage broadcast" match="any">
         <choose>
           <if variable="container-title">   
             <text variable="title" suffix=". "/>
@@ -161,47 +148,47 @@ Patent main creator should be Zotero "assignee", which is not yet mapped against
             <text variable="title" font-style="italic"/>
           </else>
         </choose>    
-      </else-if>
+      </if>
       <else-if type="report">
 <!-- Title:Report type n°XXX
 or   Title:Report n°XXX (if no report type)
 or   Title:Report type (if no number)
 -->
-        <text variable="title" font-style="italic"/>
-        <choose>
-          <if variable="number">
-            <choose> 
-              <if variable="genre">
-                <group delimiter=" ">
-                  <text variable="genre" prefix="&#8239;: "/>
-                  <text term="issue" form="short"/>
-                </group>
-              </if>
-              <else>
-                <group delimiter=" ">
-                  <text term="report" prefix="&#8239;: "/>
-                  <text term="issue" form="short"/>
-                </group>
-              </else>
-            </choose>
-            <text variable="number"/>
-          </if>
-          <else-if variable="genre">
-            <text variable="genre" prefix="&#8239;: "/>
-          </else-if>
-        </choose>
+        <group delimiter=". ">
+          <text variable="title" font-style="italic"/>
+          <choose>
+            <if variable="number">
+              <choose> 
+                <if variable="genre">
+                  <group delimiter=" ">
+                    <text variable="genre"/>
+                    <text term="issue" form="short"/>
+                  </group>
+                </if>
+                <else>
+                  <group delimiter=" ">
+                    <text value="Rapport"/>
+                    <text term="issue" form="short"/>
+                  </group>
+                </else>
+              </choose>
+              <text variable="number"/>
+            </if>
+            <else-if variable="genre">
+              <text variable="genre"/>
+            </else-if>
+          </choose>
+        </group>
       </else-if>
-      <else-if type="patent">
-        <text variable="title" font-style="italic"/>
+      <else-if type="thesis">
+        <group delimiter=". ">
+          <text variable="title" font-style="italic"/>
+          <text variable="genre"/>
+        </group>
       </else-if>
       <else>
         <text variable="title" font-style="italic"/>
       </else>
-    </choose>
-    <choose>
-      <if variable="URL">
-        <text term="online" prefix=" [" suffix="]"/>
-      </if>
     </choose>
   </macro>
   <macro name="volume">
@@ -242,31 +229,128 @@ For report, number is managed in title macro-->
       </if>
     </choose>
   </macro>
-  <macro name="medium">
-<!-- Display only for broadcast, motion_picture, song-->
+  <macro name="online">
     <choose>
-      <if type="broadcast motion_picture song" match="any">
-        <text variable="medium"/>
+      <if variable="URL DOI" match="any">
+        <text term="online"/>
       </if>
     </choose>
   </macro>
-  <macro name="genre">
-<!-- present in CSL types: post-weblog (mapped with blogPost:websiteType (type) ; book (mapped with computerProgram:programmingLanguage) ; motion_picture (mapped with film:genre (type)) ; post (mapped with forumPost:postType (type)) ; personal_communication (mapped with letter:genre) ; manuscript (mapped with manuscript:manuscriptType (type)) ; map (mapped with map:mapType (type)) ; speech (mapped with presentation:presentationType (type)) ; report (mapped with report:reportType (type)) ; thesis (mapped with thesis:thesisType (type)) ; webpage (mapped with webpage:websiteType (type))
-For reports, genre is managed in title macro-->
+  <macro name="medium_designation">
+<!--
+Reference : ISO 690:2010 §7 (physical ressources) and §15.2.2 (online ressources)
+§7 Medium designation
+"If necessary, information about the nature of the information resource and/or the form in which it is made available should be given in brackets. See also 15.2.2 on the medium designation for electronic information resources.
+EXAMPLES [Braille] [cine film (35 mm)] [computer tape reel] [CD] [DVD] [Blu-ray disc] [film strip (35 mm)] [globe] [map] [microfiche (48x)] [microfilm reel (16 mm negative)] [photograph] [score] [slide (2 in.)] [sound disc (45 rpm)] [videocassette (VHS PAL)] [wall chart]"
+
+§ 15.2.2 Type of medium
+"The type of medium for the electronic information resource should be given in the medium designation (see Clause 7).
+EXAMPLES [online] [disc]
+If desired, the specific type of electronic information resource may also be given.
+EXAMPLE 3 EXAMPLE 4
+[online database] [online serial] [computer program] [electronic mail] [digital image] [podcast] [audiofile]"
+
+It is not always possible to get this information from Zotero data once they are transformed in CSL data. Sometimes it can be guessed from the presence of URL or a DOI (for [online]), from the type of the ressource, from "medium" field, or from the "genre" fields. Some CSL types are mapped with several Zotero types (personal_communication = letter + instantMessage ; song = podcast + audioRecording, etc.). In those cases, it will be difficult to guess the proper medium designator.
+"genre" and "medium" fields can also be used, but cautiously, as their meaning depends on the ressource type. In most cases, their content does not match the "medium designator" as defined in the standard.
+
+CSL definition for medium field:
+'medium description (e.g. "CD", "DVD", etc.)'
+medium field is used in those CSL types: 
+    graphic         (mapped against artwork:artworkMedium (medium))
+    song            (mapped against podcast:audioFileType (medium))
+    song            (mapped against audioRecording:audioRecordingFormat (medium))
+    broadcast       (mapped against radioBroadcast:audioRecordingFormat (medium))
+    broadcast       (mapped against tvBroadcast:videoRecordingFormat (medium))
+    book            (mapped against computerProgram:system)
+    motion_picture  (mapped against film:videoRecordingFormat (medium))
+    motion_picture  (mapped against videoRecording:videoRecordingFormat (medium))
+    interview       (mapped against interview:interviewMedium (medium))
+
+CSL definition for genre field:
+'class, type or genre of the item (e.g. "adventure" for an adventure movie, "PhD dissertation" for a PhD thesis)'
+genre field is used in those CSL types: 
+    post-weblog             (mapped against blogPost:websiteType (type))
+    book                    (mapped against computerProgram:programmingLanguage)
+    motion_picture          (mapped against film:genre (type))
+    post                    (mapped against forumPost:postType (type))
+    personal_communication  (mapped against letter:genre)
+    manuscript              (mapped against manuscript:manuscriptType (type))
+    map                     (mapped against map:mapType (type))
+    speech                  (mapped against presentation:presentationType (type))
+    report                  (mapped against report:reportType (type))
+    thesis                  (mapped against thesis:thesisType (type))
+    webpage                 (mapped against webpage:websiteType (type))
+
+-->
     <choose>
-      <if type="map">
+      <if type="book">
         <choose>
-          <if variable="genre">
-            <text variable="genre" prefix="[" suffix="]"/>
+          <if variable="medium version" match="any">
+<!-- softwares can only be identified in some cases: type book + use of medium or version fields
+but the medium field should not be treated as a medium (it describes the "system")-->
+            <text value="logiciel" prefix="[" suffix="]"/>
           </if>
-          <else>
-            <text term="map_genre" prefix="[" suffix="]"/>
-          </else>
         </choose>
       </if>
-      <else-if type="report" match="none">
-        <text variable="genre"/>
+      <else-if type="map">
+<!-- For type "map", the genre field should be used (labelled as "type" in Zotero) and not the medium field
+If no information is provided, generic medium "carte" is used
+If the map is avalaible online, add "en ligne"-->
+        <group delimiter=" " prefix="[" suffix="]">
+          <choose>
+            <if variable="genre">
+              <text variable="genre"/>
+            </if>
+            <else>
+              <text value="carte"/>
+            </else>
+          </choose>
+          <text macro="online"/>
+        </group>
       </else-if>
+      <else-if type="manuscript">
+<!-- For type "manuscript", the genre field should be used (labelled as "type" in Zotero) and not the medium field
+If no information is provided, generic medium "manuscrit" is used
+If the mss is avalaible online, add "en ligne"-->
+        <group delimiter=" " prefix="[" suffix="]">
+          <choose>
+            <if variable="genre">
+              <text variable="genre"/>
+            </if>
+            <else>
+              <text value="manuscrit"/>
+            </else>
+          </choose>
+          <text macro="online"/>
+        </group>
+      </else-if>
+      <else-if type="graphic">
+        <group delimiter=" " prefix="[" suffix="]">
+          <choose>
+            <if variable="medium">
+              <text variable="medium"/>
+            </if>
+            <else>
+              <text value="image"/>
+            </else>
+          </choose>
+          <text macro="online"/>
+        </group>
+      </else-if>
+      <else-if type="song">
+<!--can be a podcast (medium= type of file) or a physical recording. No try to guess a generic medium-->
+        <group delimiter=" " prefix="[" suffix="]">
+          <choose>
+            <if variable="medium">
+              <text variable="medium"/>
+            </if>
+          </choose>
+          <text macro="online"/>
+        </group>
+      </else-if>
+      <else>
+          <text macro="online" prefix="[" suffix="]"/>
+      </else>
     </choose>
   </macro>
   <macro name="date">
@@ -292,7 +376,7 @@ FIXME Add a way to manage uncertain dates and range date. limit-day-ordinals-to-
         </choose>
       </if>
       <else>
-        <text term="no date" prefix="[" suffix="]"/>
+        <text term="no date" form="short" prefix="[" suffix="]"/>
       </else>
     </choose>
   </macro>
@@ -317,14 +401,7 @@ FIXME Add a way to manage uncertain dates and range date. limit-day-ordinals-to-
             <text variable="publisher-place"/>
           </if>
           <else>
-            <choose>
-              <if variable="publisher">
-                <text term="no place" prefix="[" suffix="]" text-case="capitalize-first"/>
-              </if>
-              <else>
-                <text term="no place" prefix="[" text-case="capitalize-first"/>
-              </else>
-            </choose>
+            <text value="s.&#160;l." prefix="[" suffix="]" text-case="capitalize-first"/>
           </else>
         </choose>
       </if>
@@ -345,14 +422,7 @@ FIXME Add a way to manage uncertain dates and range date. limit-day-ordinals-to-
             <text variable="publisher"/>
           </if>
           <else>
-            <choose>
-              <if variable="publisher-place">
-                <text prefix="[" suffix="]" term="no publisher"/>
-              </if>
-              <else>
-                <text suffix="]" term="no publisher"/>
-              </else>
-            </choose>
+            <text value="s.&#160;n." prefix="[" suffix="]"/>
           </else>
         </choose>
       </if>
@@ -480,19 +550,21 @@ Uncomment to mention the number of pages of books and monographs
     <text variable="note" text-case="capitalize-first"/>
   </macro>
   <citation et-al-min="4" et-al-use-first="3">
-    <layout suffix="." delimiter="&#160;; ">
+    <layout suffix="." delimiter="&#8239;; ">
       <group delimiter=". ">
         <text macro="responsability"/>
-        <text macro="title"/>
         <group delimiter=" ">
-          <text macro="volume"/>
+          <group delimiter=". ">
+            <text macro="title"/>
 <!-- volume : used for books and monographs (a volume of a multivolume book)-->
-          <text macro="medium"/>
+            <text macro="volume"/>
+          </group>
+<!-- medium : [online], [map], [software], etc.-->
+          <text macro="medium_designation"/>
         </group>
-        <text macro="genre"/>
-<!-- secondary-responsability : used for patent inventors -->
+<!-- secondary-responsability : used for patent inventors and translators -->
+        <text macro="edition"/>
         <text macro="secondary-responsability"/>
-<!--        <text macro="edition"/> -->
         <group delimiter=", ">
           <group delimiter=". ">
             <group delimiter="&#8239;: ">
@@ -526,16 +598,18 @@ Uncomment to cite collection in note
     <layout>
       <group delimiter=". ">
         <text macro="responsability"/>
-        <text macro="title"/>
         <group delimiter=" ">
-          <text macro="volume"/>
+          <group delimiter=". ">
+            <text macro="title"/>
 <!-- volume : used for books and monographs (a volume of a multivolume book)-->
-          <text macro="medium"/>
+            <text macro="volume"/>
+          </group>
+<!-- medium : [online], [map], [software], etc.-->
+          <text macro="medium_designation"/>
         </group>
-        <text macro="genre"/>
-<!-- secondary-responsability : used for patent inventors -->
-        <text macro="secondary-responsability"/>
+<!-- secondary-responsability : used for patent inventors and translators -->
         <text macro="edition"/>
+        <text macro="secondary-responsability"/>
         <group delimiter=", ">
           <group delimiter=". ">
             <group delimiter="&#8239;: ">
@@ -551,7 +625,10 @@ Uncomment to cite collection in note
           </group>
         </group>
         <text macro="accessed"/>
+<!--
+Uncomment to cite collection in note
         <text macro="collection"/>
+-->
         <text macro="isbn"/>
         <text macro="access"/>
         <text macro="note"/>
