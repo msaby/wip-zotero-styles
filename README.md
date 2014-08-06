@@ -30,12 +30,10 @@ Les éléments obligatoires selon la norme sont en **gras**.
 
 Ressource non incluse dans une ressource hôte:
 
-**NOM, Prénom des créateurs principaux (fonction)**. ***Titre*** : Type de rapport n° Numéro de rapport. Volume \[Medium\]. Genre. Fonction des créateurs secondaires Prénom NOM des créateurs secondaires. **Edition**. **Lieu** : **Editeur**. Numéro (brevets uniquement). **Date**. **\[Consulté le Date d'accès\]**. Collection. **ISBN**. **URL ou DOI**. Archive : localisation ou cote. Notes
+**NOM, Prénom des créateurs principaux (fonction)**. ***Titre***. Type de rapport n° Numéro de rapport. Type de thèse. Volume \[Medium\]. Mention d'édition. Fonction des créateurs secondaires Prénom NOM des créateurs secondaires. **Edition**. **Lieu** : **Editeur**. Numéro (brevets uniquement). **Date**. **\[Consulté le Date d'accès\]**. Collection. **ISBN**. **URL ou DOI**. Archive : localisation ou cote. Notes
 Ressource incluse dans une ressource hôte
 
-**NOM, Prénom des créateurs principaux (fonction)**. **Titre**. Dans : **CREATEURS DE LA RESSOURCE HÔTE**. ***Titre***. Volume \[Medium\]. Genre. Fonction des créateurs secondaires Prénom NOM des créateurs secondaires. **Edition**. **Lieu** : **Editeur**. **Date**. **\[Consulté le Date d'accès\]**. Collection. **ISBN**. **URL ou DOI**. Archive : localisation ou cote. Notes
-
-FIXME : clarifier genre et medium dans le code
+**NOM, Prénom des créateurs principaux (fonction)**. **Titre**. Dans : **CREATEURS DE LA RESSOURCE HÔTE**. ***Titre***. Volume \[Medium\]. Mention d'édition. Fonction des créateurs secondaires Prénom NOM des créateurs secondaires. **Edition**. **Lieu** : **Editeur**. **Date**. **\[Consulté le Date d'accès\]**. Collection. **ISBN**. **URL ou DOI**. Archive : localisation ou cote. Notes
 
 **Créateurs principaux** :
 
@@ -69,14 +67,6 @@ Inventeurs : Prénom NOM1 et Prénom NOM2
 
 Trad. par Prénom NOM1, Prénom NOM2 et Prénom NOM3
 
-**Volumes** :
-
-Si la ressource citée est un volume d'un ouvrage publié en plusieurs volumes, le volume est donné après le titre. Si le champ volume contient un chiffre, le chiffre sera précédé de "Vol. ". S'il contient une expression plus complexe comme "Tome 3, vol. 2", l'expression sera reprise telle quelle
-
-Ex : 
-
-*Titre*. Vol. 2
-
 **Types et numéro de rapport**:
 
 Si la ressource est un rapport, et qu'un numéro et un type de rapports sont présents dans Zotero, le numéro sera cité, précédé du type et de "n°". Si un numéro est présent mais pas de type, le type générique "Rapport" sera utilisé. Si le type est présent mais pas le numéro, seul le type est affiché.
@@ -85,17 +75,47 @@ Ex :
 
 GOURAULT, Jacqueline et KALTENBACH, Philippe. **Les premiers enseignements du quinzième plan de lutte contre la précarité dans la fonction publique** : Rapport d’information n°772 (2013-2014) \[en ligne\]. Paris : Sénat, 23 juillet 2014. \[Consulté le 30 juillet 2014\].
 
-**Dates** :
+**Type de thèse**:
+
+Si la ressource est de type thèse (utilisable pour les thèses et autres travaux universitaires), le type est indiqué.
+
+**Volumes** :
+
+Si la ressource citée est un volume d'un ouvrage publié en plusieurs volumes, le volume est donné après le titre. Si le champ volume contient un chiffre, le chiffre sera précédé de "Vol. ". S'il contient une expression plus complexe comme "Tome 3, vol. 2", l'expression sera reprise telle quelle
+
+Ex : 
+
+*Titre*. Vol. 2
+
+**Medium**:
+
+Entre crochets. Les médiums suivants sont identifiés:
+
+- logiciel ;
+
+- carte ;
+
+- manuscrit ;
+
+- image ;
+
+- s'il existe, le champ "medium" d'une ressource de type graphic, map, manuscript, song remplace ces médiums génériques.
+
+La mention "en ligne" précise les types de medium si une URL ou un DOI est présent ("carte en ligne", "image en ligne", etc), sauf pour les logiciels.
+
+La mention "en ligne" est utilisée seule s'il est impossible de préciser un médium plus précis.
+
+**Dates**:
 
 la plus complète possible, en fonction des données présentes dans Zotero : "Mois année" pour les articles et "jour mois année" pour les autre ressources, sur le modèle "30 juillet 2014".
 
-En cas de date inconnue: \[s.d.\]
+En cas de date inconnue: \[s. d.\]
 
 FIXME : Pas de gestion des dates incertaines ni des tranches de dates. Vérifier ce que donnent les dates entre crochets
 
 **Lieux** et **Editeurs**:
 
-Pour les types de documents book map thesis report chapter entry entry-dictionary entry-encyclopedia, en cas de lieu inconnu: \[s.l.\]. En cas d'éditeur inconnu: \[s.n.\]. En cas de lieu et d'éditeur inconnu : \[s.l. : s.n.\]
+Pour les types de documents book map thesis report chapter entry entry-dictionary entry-encyclopedia, en cas de lieu inconnu: \[s. l.\]. En cas d'éditeur inconnu: \[s. n.\]. En cas de lieu et d'éditeur inconnu : \[s.l. : s.n.\]
 
 **Contributions dans des monographies et périodiques**
 
