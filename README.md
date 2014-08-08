@@ -1,11 +1,12 @@
 # Nouveaux styles CSL pour Zotero
 
-Ce projet contiendra un ou plusieurs styles CSL pour Zotero.
+Ce projet contient 2 styles CSL pour Zotero, inspirés de la norme ISO 690.
 
 ## iso690-note-fr
 **Description**
 
 Style compatible avec la norme ISO 690, permettant des citations en notes, avec une bibliographie finale, basé sur la version ISO 690 "author-date" écrite par Mellifluo, Grolimund, Hardegger et Giraud.
+
 Ne gère pas les "op.cit" et "ibid" (les références sont répétées)
 
 **Choix dans l'interprétation de la norme**
@@ -174,3 +175,20 @@ bibliographie : BENTON, Arthur et ANDERSON, Steven W. Aphasia: Historical Perspe
 **Tri de la bibliographie**
 
 Le tri se fait par auteurs, puis par titres.
+
+## iso690-note-opcit-fr
+**Description**
+
+Style compatible avec la norme ISO 690, permettant des citations en notes, avec une bibliographie finale, basé sur la version ISO 690 "author-date" écrite par Mellifluo, Grolimund, Hardegger et Giraud.
+
+La norme ne prévoit pas l'usage de "ibid" et "op. cit.", mais il est répandu en France.
+
+4 types de références dans les citations en note:
+
+- 1re occurrence : référence complète (identique à la référence donnée en bibliographie)
+
+- occurrences suivantes : référence simplifiée (sans auteurs secondaires, collections, isbn, doi, url, date d'accès, archive et cote, notes)
+
+- ibid. : référence citée dans la note précédente
+
+- op. cit. : référence citée dans une note proche (une des 5 dernières notes)
