@@ -454,6 +454,12 @@ FIXME Add a way to manage uncertain dates and range date. limit-day-ordinals-to-
       <text variable="collection-number"/>
     </group>
   </macro>
+  <macro name="locator">
+    <group delimiter="&#160;">
+      <label variable="locator" form="short"/>
+      <text variable="locator"/>
+    </group>
+  </macro>
   <macro name="issue-pagination-locator">
 <!-- used for issues of serials, (pagination of books and monographs), and locator of specific passages
 If a locator is used, it replaces the original pagination-->
@@ -470,10 +476,7 @@ If a locator is used, it replaces the original pagination-->
           </group>
           <choose>
             <if variable="locator">
-              <group>
-                <label variable="locator" form="short" suffix="&#160;"/>
-                <text variable="locator"/>
-              </group>
+              <text macro="locator"/>
             </if>
             <else>
               <group>
@@ -485,10 +488,7 @@ If a locator is used, it replaces the original pagination-->
         </group>
       </if>
       <else-if variable="locator">
-        <group>
-          <label variable="locator" form="short" suffix="&#160;"/>
-          <text variable="locator"/>
-        </group>
+        <text macro="locator"/>
       </else-if>
       <else-if type="chapter entry entry-dictionary entry-encyclopedia paper-conference" match="any">
         <group>
@@ -548,17 +548,89 @@ Uncomment to mention the number of pages of books and monographs
   <macro name="note">
     <text variable="note" text-case="capitalize-first"/>
   </macro>
-  <citation et-al-min="4" et-al-use-first="3" near-note-distance="10">
+  <macro name="short-reference">
+    <group delimiter=". ">
+      <text macro="responsability"/>
+      <group delimiter=" ">
+        <group delimiter=". ">
+          <text macro="title"/>
+<!-- volume : used for books and monographs (a volume of a multivolume book)-->
+          <text macro="volume"/>
+        </group>
+<!-- medium : [online], [map], [software], etc.-->
+        <text macro="medium_designation"/>
+      </group>
+      <text macro="thesis-report-genre"/>
+      <text macro="edition"/>
+<!-- secondary-responsability : used for patent inventors and translators -->
+<!--  <text macro="secondary-responsability"/> -->
+      <group delimiter=", ">
+        <group delimiter=". ">
+          <group delimiter="&#8239;: ">
+            <text macro="publisher-place"/>
+            <text macro="publisher"/>
+          </group>
+          <text macro="number"/>
+        </group>
+        <group delimiter=", ">
+          <text macro="date"/>
+          <text macro="numberOfVolumes"/>
+          <text macro="issue-pagination-locator"/>
+        </group>
+      </group>
+<!--  
+      <text macro="accessed"/>
+      <text macro="collection"/>
+      <text macro="isbn"/>
+      <text macro="access"/>
+      <text macro="note"/>
+-->
+    </group>
+  </macro>
+  <macro name="complete-reference">
+    <group delimiter=". ">
+      <text macro="responsability"/>
+      <group delimiter=" ">
+        <group delimiter=". ">
+          <text macro="title"/>
+<!-- volume : used for books and monographs (a volume of a multivolume book)-->
+          <text macro="volume"/>
+        </group>
+<!-- medium : [online], [map], [software], etc.-->
+        <text macro="medium_designation"/>
+      </group>
+      <text macro="thesis-report-genre"/>
+      <text macro="edition"/>
+<!-- secondary-responsability : used for patent inventors and translators -->
+      <text macro="secondary-responsability"/>
+      <group delimiter=", ">
+        <group delimiter=". ">
+          <group delimiter="&#8239;: ">
+            <text macro="publisher-place"/>
+            <text macro="publisher"/>
+          </group>
+          <text macro="number"/>
+        </group>
+        <group delimiter=", ">
+          <text macro="date"/>
+          <text macro="numberOfVolumes"/>
+     <!--     <text macro="issue-pagination-locator"/> -->
+        </group>
+      </group> 
+      <text macro="accessed"/>
+      <text macro="collection"/>
+      <text macro="isbn"/>
+      <text macro="access"/>
+      <text macro="note"/>
+    </group>
+  </macro>
+  <citation et-al-min="4" et-al-use-first="3" near-note-distance="5">
     <layout suffix="." delimiter="&#8239;; ">
-      <text variable="first-reference-note-number" prefix="ref. "/>
       <choose>
         <if position="ibid-with-locator">
           <group delimiter=", ">
             <text term="ibid" font-style="italic"/>
-            <group>
-              <label variable="locator" form="short" suffix="&#160;"/>
-              <text variable="locator"/>
-            </group>
+            <text macro="locator"/>
           </group>
         </if>
         <else-if position="ibid">
@@ -570,80 +642,19 @@ Uncomment to mention the number of pages of books and monographs
               <text macro="responsability" />
               <text term="cited" font-style="italic"/>
             </group>
-            <group>
-              <label variable="locator" form="short" suffix="&#160;"/>
-              <text variable="locator"/>
-            </group>
+            <choose>
+              <if variable="locator">
+                <text macro="locator"/>
+              </if>
+            </choose>
           </group>
         </else-if>
         <else-if position="subsequent">
-          <group delimiter=". ">
-          <text macro="responsability"/>
-          <group delimiter=" ">
-            <group delimiter=". ">
-              <text macro="title"/>
-<!-- volume : used for books and monographs (a volume of a multivolume book)-->
-              <text macro="volume"/>
-            </group>
-<!-- medium : [online], [map], [software], etc.-->
-            <text macro="medium_designation"/>
-          </group>
-          <text macro="thesis-report-genre"/>
-          <text macro="edition"/>
-          <group delimiter=", ">
-            <group delimiter=". ">
-              <group delimiter="&#8239;: ">
-                <text macro="publisher-place"/>
-                <text macro="publisher"/>
-              </group>
-              <text macro="number"/>
-            </group>
-            <group delimiter=", ">
-              <text macro="date"/>
-              <text macro="numberOfVolumes"/>
-              <text macro="issue-pagination-locator"/>
-            </group>
-          </group>
-          <text macro="note"/>
-        </group>
+          <text macro="short-reference"/>
         </else-if>
         <else>
-          <group delimiter=". ">
-          <text macro="responsability"/>
-          <group delimiter=" ">
-            <group delimiter=". ">
-              <text macro="title"/>
-<!-- volume : used for books and monographs (a volume of a multivolume book)-->
-              <text macro="volume"/>
-            </group>
-<!-- medium : [online], [map], [software], etc.-->
-            <text macro="medium_designation"/>
-          </group>
-        <text macro="thesis-report-genre"/>
-        <text macro="edition"/>
-<!-- secondary-responsability : used for patent inventors, and translators -->
-        <text macro="secondary-responsability"/>
-          <group delimiter=", ">
-            <group delimiter=". ">
-              <group delimiter="&#8239;: ">
-                <text macro="publisher-place"/>
-                <text macro="publisher"/>
-              </group>
-              <text macro="number"/>
-            </group>
-            <group delimiter=", ">
-              <text macro="date"/>
-              <text macro="numberOfVolumes"/>
-              <text macro="issue-pagination-locator"/>
-            </group>
-          </group>
-          <text macro="accessed"/>
-          <text macro="collection"/>
-          <text macro="isbn"/>
-          <text macro="access"/>
-          <text macro="note"/>
-        </group>
-      </else>
+          <text macro="complete-reference"/>
+        </else>
       </choose>
     </layout>
   </citation>
@@ -653,41 +664,7 @@ Uncomment to mention the number of pages of books and monographs
       <key macro="title"/>
     </sort>
     <layout>
-      <group delimiter=". ">
-        <text macro="responsability"/>
-        <group delimiter=" ">
-          <group delimiter=". ">
-            <text macro="title"/>
-<!-- volume : used for books and monographs (a volume of a multivolume book)-->
-            <text macro="volume"/>
-          </group>
-<!-- medium : [online], [map], [software], etc.-->
-          <text macro="medium_designation"/>
-        </group>
-        <text macro="thesis-report-genre"/>
-        <text macro="edition"/>
-<!-- secondary-responsability : used for patent inventors, and translators -->
-        <text macro="secondary-responsability"/>
-        <group delimiter=", ">
-          <group delimiter=". ">
-            <group delimiter="&#8239;: ">
-              <text macro="publisher-place"/>
-              <text macro="publisher"/>
-            </group>
-            <text macro="number"/>
-          </group>
-          <group delimiter=", ">
-            <text macro="date"/>
-            <text macro="numberOfVolumes"/>
-            <text macro="issue-pagination-locator"/>
-          </group>
-        </group>
-        <text macro="accessed"/>
-        <text macro="collection"/>
-        <text macro="isbn"/>
-        <text macro="access"/>
-        <text macro="note"/>
-      </group>
+      <text macro ="complete-reference"/>
     </layout>
   </bibliography>
 </style>
