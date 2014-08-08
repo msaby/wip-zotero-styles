@@ -149,47 +149,45 @@ Patent main creator should be Zotero "assignee", which is not yet mapped against
           </else>
         </choose>    
       </if>
-      <else-if type="report">
-<!-- Title:Report type n°XXX
-or   Title:Report n°XXX (if no report type)
-or   Title:Report type (if no number)
--->
-        <group delimiter=". ">
-          <text variable="title" font-style="italic"/>
-          <choose>
-            <if variable="number">
-              <choose> 
-                <if variable="genre">
-                  <group delimiter=" ">
-                    <text variable="genre"/>
-                    <text term="issue" form="short"/>
-                  </group>
-                </if>
-                <else>
-                  <group delimiter=" ">
-                    <text value="Rapport"/>
-                    <text term="issue" form="short"/>
-                  </group>
-                </else>
-              </choose>
-              <text variable="number"/>
-            </if>
-            <else-if variable="genre">
-              <text variable="genre"/>
-            </else-if>
-          </choose>
-        </group>
-      </else-if>
-      <else-if type="thesis">
-        <group delimiter=". ">
-          <text variable="title" font-style="italic"/>
-          <text variable="genre"/>
-        </group>
-      </else-if>
       <else>
         <text variable="title" font-style="italic"/>
       </else>
     </choose>
+  </macro>
+  <macro name="thesis-report-genre">
+	<choose>
+      <if type="report">
+<!-- Title:Report type n°XXX
+or   Title:Report n°XXX (if no report type)
+or   Title:Report type (if no number)
+-->
+        <choose>
+          <if variable="number">
+			<choose> 
+              <if variable="genre">
+                <group delimiter=" ">
+                  <text variable="genre"/>
+                  <text term="issue" form="short"/>
+                </group>
+              </if>
+              <else>
+                <group delimiter=" ">
+                  <text value="Rapport"/>
+                  <text term="issue" form="short"/>
+                </group>
+              </else>
+            </choose>
+			<text variable="number"/>
+          </if>
+          <else-if variable="genre">
+            <text variable="genre"/>
+          </else-if>
+        </choose>
+      </if>
+      <else-if type="thesis">
+        <text variable="genre"/>
+      </else-if>
+	</choose>
   </macro>
   <macro name="volume">
 <!-- If the volume field contains "Tome 1, vol. 2", this string is displayed. If it contains only a number, 'vol.' is added before-->
@@ -562,8 +560,9 @@ Uncomment to mention the number of pages of books and monographs
 <!-- medium : [online], [map], [software], etc.-->
           <text macro="medium_designation"/>
         </group>
-<!-- secondary-responsability : used for patent inventors and translators -->
+        <text macro="thesis-report-genre"/>
         <text macro="edition"/>
+<!-- secondary-responsability : used for patent inventors and translators -->
         <text macro="secondary-responsability"/>
         <group delimiter=", ">
           <group delimiter=". ">
@@ -607,8 +606,9 @@ Uncomment to cite collection in note
 <!-- medium : [online], [map], [software], etc.-->
           <text macro="medium_designation"/>
         </group>
-<!-- secondary-responsability : used for patent inventors and translators -->
+        <text macro="thesis-report-genre"/>
         <text macro="edition"/>
+<!-- secondary-responsability : used for patent inventors, and translators -->
         <text macro="secondary-responsability"/>
         <group delimiter=", ">
           <group delimiter=". ">
@@ -625,10 +625,7 @@ Uncomment to cite collection in note
           </group>
         </group>
         <text macro="accessed"/>
-<!--
-Uncomment to cite collection in note
         <text macro="collection"/>
--->
         <text macro="isbn"/>
         <text macro="access"/>
         <text macro="note"/>
