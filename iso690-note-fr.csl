@@ -46,6 +46,7 @@
     </names>
   </macro>
   <macro name="translator">
+<!-- Called by secondary-responsability-->
     <names variable="translator">
       <label text-case="capitalize-first" form="verb-short" suffix=" "/>
       <name and="text" sort-separator=" " delimiter=", " delimiter-precedes-last="never">
@@ -74,6 +75,7 @@ Patent main creator should be Zotero "assignee", which is not yet mapped against
     </choose>
   </macro>
   <macro name="patent-inventor">
+<!-- Called by secondary-responsability-->
     <text value="Inventeur(s)" suffix="&#8239;: "/>
     <names variable="author">
       <name and="text" sort-separator=" " delimiter=", " delimiter-precedes-last="never">
@@ -547,7 +549,44 @@ Uncomment to mention the number of pages of books and monographs
   <macro name="note">
     <text variable="note" text-case="capitalize-first"/>
   </macro>
-  <macro name="complete_reference">
+  <macro name="citation-reference">
+    <group delimiter=". ">
+      <text macro="responsability"/>
+      <group delimiter=" ">
+        <group delimiter=". ">
+          <text macro="title"/>
+<!-- volume : used for books and monographs (a volume of a multivolume book)-->
+          <text macro="volume"/>
+        </group>
+<!-- medium : [online], [map], [software], etc.-->
+        <text macro="medium_designation"/>
+      </group>
+      <text macro="thesis-report-genre"/>
+      <text macro="edition"/>
+<!-- secondary-responsability : used for patent inventors and translators -->
+<!--  <text macro="secondary-responsability"/> -->
+      <group delimiter=", ">
+        <group delimiter=". ">
+          <group delimiter="&#8239;: ">
+            <text macro="publisher-place"/>
+            <text macro="publisher"/>
+          </group>
+          <text macro="number"/>
+        </group>
+        <group delimiter=", ">
+          <text macro="date"/>
+          <text macro="numberOfVolumes"/>
+          <text macro="issue-pagination-locator"/>
+        </group>
+      </group>
+      <text macro="accessed"/>
+<!--      <text macro="collection"/> -->
+      <text macro="isbn"/>
+      <text macro="access"/>
+      <text macro="note"/>
+    </group>
+  </macro>
+  <macro name="bibliography-reference">
     <group delimiter=". ">
       <text macro="responsability"/>
       <group delimiter=" ">
@@ -586,7 +625,7 @@ Uncomment to mention the number of pages of books and monographs
   </macro>
   <citation et-al-min="4" et-al-use-first="3">
     <layout suffix="." delimiter="&#8239;; ">
-	  <text macro="complete_reference"/>
+	  <text macro="citation-reference"/>
     </layout>
   </citation>
   <bibliography>
@@ -595,7 +634,7 @@ Uncomment to mention the number of pages of books and monographs
       <key macro="title"/>
     </sort>
     <layout>
-      <text macro="complete_reference"/>
+      <text macro="bibliography-reference"/>
     </layout>
   </bibliography>
 </style>

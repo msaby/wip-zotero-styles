@@ -3,39 +3,43 @@
 Ce projet contiendra un ou plusieurs styles CSL pour Zotero.
 
 ## iso690-note-fr
-**Description** :
+**Description**
 
 Style compatible avec la norme ISO 690, permettant des citations en notes, avec une bibliographie finale, basé sur la version ISO 690 "author-date" écrite par Mellifluo, Grolimund, Hardegger et Giraud.
 Ne gère pas les "op.cit" et "ibid" (les références sont répétées)
 
-**Choix dans l'interprétation de la norme** :
+**Choix dans l'interprétation de la norme**
 
-Les références sont **structurées de manière identique dans les notes et la bibliographie**, à deux exceptions près :
+Les références sont **structurées de manière identique dans les notes et la bibliographie**, à trois exceptions près :
 
-- tous les auteurs principaux sont donnés dans la bibliographie, seulement les trois premiers (suivis de "et al.") dans les notes
+- tous les auteurs principaux sont donnés dans la bibliographie, seulement les trois premiers (suivis de "et al.") dans les notes,
 
-- la collection n'est donnée que dans la bibliographie
+- la collection n'est donnée que dans la bibliographie,
 
-**Ponctuation** :
+- les auteurs secondaires ne sont donnés que dans la bibliographie.
 
-Les élements constituant les références sont en général séparés par un point (.), sauf quelques exceptions. Les titres des ressources "hôtes" ne sont pas introduites par des guillemets. Les éléments ne figurant pas sur la ressources sont encadrés par des crochets carrés (\[\]). Les fonctions des créateurs principaux sont entre parenthèses.
+**Ponctuation**
+
+Les élements constituant les références sont en général séparés par un point suivi d'un espace (. ), sauf quelques exceptions : deux points (:) entre le lieu d'édition et l'éditeur, virgule (, ) entre l'éditeur et la date et avant la pagination, etc.
+
+Les titres des ressources "hôtes" ne sont pas introduites par des guillemets. Les éléments ne figurant pas sur la ressources sont encadrés par des crochets carrés (\[\]). Les fonctions des créateurs principaux sont entre parenthèses.
 
 **Typographie**
 
 Le nom des créateurs principaux est en majuscules. Les titres sont en italique sauf si la ressource citée est incluse dans une ressource hôte (dans ce cas, celle-ci est en italique)
 
-**Ordre général** :
+**Ordre général**
 
-Les éléments obligatoires selon la norme sont en **gras**.
+Les éléments obligatoires dans tous les cas de figure selon la norme sont en **gras**.
 
 Ressource non incluse dans une ressource hôte:
 
-**NOM, Prénom des créateurs principaux (fonction)**. ***Titre***. Type de rapport n° Numéro de rapport. Type de thèse. Volume \[Medium\]. Mention d'édition. Fonction des créateurs secondaires Prénom NOM des créateurs secondaires. **Edition**. **Lieu** : **Editeur**. Numéro (brevets uniquement). **Date**. **\[Consulté le Date d'accès\]**. Collection. **ISBN**. **URL ou DOI**. Archive : localisation ou cote. Notes
+**NOM, Prénom des créateurs principaux (fonction)**. ***Titre***. Volume \[Medium\]. Type de rapport n° Numéro de rapport. Type de thèse. **Mention d'édition**. Fonction des créateurs secondaires Prénom NOM des créateurs secondaires. **Lieu** : **Editeur**. Numéro (brevets uniquement). **Date**. **\[Consulté le Date d'accès\]**. Collection. **ISBN**. **URL ou DOI**. Archive : localisation ou cote. Notes
 Ressource incluse dans une ressource hôte
 
-**NOM, Prénom des créateurs principaux (fonction)**. **Titre**. Dans : **CREATEURS DE LA RESSOURCE HÔTE**. ***Titre***. Volume \[Medium\]. Mention d'édition. Fonction des créateurs secondaires Prénom NOM des créateurs secondaires. **Edition**. **Lieu** : **Editeur**. **Date**. **\[Consulté le Date d'accès\]**. Collection. **ISBN**. **URL ou DOI**. Archive : localisation ou cote. Notes
+**NOM, Prénom des créateurs principaux (fonction)**. **Titre**. Dans : **CREATEURS DE LA RESSOURCE HÔTE**. ***Titre***. Volume \[Medium\]. **Mention d'édition**. Fonction des créateurs secondaires Prénom NOM des créateurs secondaires. **Lieu** : **Editeur**. **Date**. **\[Consulté le Date d'accès\]**. Collection. **ISBN**. **URL ou DOI**. Archive : localisation ou cote. Notes
 
-**Créateurs principaux** :
+**Créateurs principaux**
 
 Les noms sont en majuscules, et précèdent les prénoms, avec une virgule en séparateur. Les différents auteurs sont séparés par des virgules, sauf le dernier, introduit par "et". Deux types de créateurs sont gérés : "auteur" et "éditeur". S'il existe au moins un "auteur", seuls les auteurs seront mentionnés. Sinon, s'il existe au moins un éditeur, seuls les "éditeurs" seront mentionnés. Les autres types d'auteurs sont traités en créateurs secondaires.
 Dans les notes, seuls 3 créateurs sont mentionnés. Dans la bibliographie, tous les auteurs le sont.
@@ -54,7 +58,7 @@ NOM, Prénom (dir.)
 
 NOM1, Prénom, NOM2, Prénom, NOM3, Prénom, NOM4, Prénom (dir.)
 
-**Créateurs secondaires** :
+**Créateurs secondaires**
 
 Les créateurs secondaires sont introduits par leur fonction (ex: "Trad. par"). Les noms sont en majuscules, et suivent les prénoms, avec un espace en séparateur. Les différents auteurs sont séparés par des virgules, sauf le dernier, introduit par "et". Deux types de créateurs sont gérés : "traducteur" et "auteur" (dans le cas d'un inventeur de brevet).
 Dans les notes, seuls 3 créateurs sont mentionnés. Dans la bibliographie, tous les auteurs le sont.
@@ -67,19 +71,19 @@ Inventeurs : Prénom NOM1 et Prénom NOM2
 
 Trad. par Prénom NOM1, Prénom NOM2 et Prénom NOM3
 
-**Types et numéro de rapport**:
+**Types et numéro de rapport**
 
 Si la ressource est un rapport, et qu'un numéro et un type de rapports sont présents dans Zotero, le numéro sera cité, précédé du type et de "n°". Si un numéro est présent mais pas de type, le type générique "Rapport" sera utilisé. Si le type est présent mais pas le numéro, seul le type est affiché.
 
-Ex : 
+Ex: 
 
 GOURAULT, Jacqueline et KALTENBACH, Philippe. **Les premiers enseignements du quinzième plan de lutte contre la précarité dans la fonction publique** : Rapport d’information n°772 (2013-2014) \[en ligne\]. Paris : Sénat, 23 juillet 2014. \[Consulté le 30 juillet 2014\].
 
-**Type de thèse**:
+**Type de thèse**
 
 Si la ressource est de type thèse (utilisable pour les thèses et autres travaux universitaires), le type est indiqué.
 
-**Volumes** :
+**Volumes**
 
 Si la ressource citée est un volume d'un ouvrage publié en plusieurs volumes, le volume est donné après le titre. Si le champ volume contient un chiffre, le chiffre sera précédé de "Vol. ". S'il contient une expression plus complexe comme "Tome 3, vol. 2", l'expression sera reprise telle quelle
 
@@ -87,17 +91,17 @@ Ex :
 
 *Titre*. Vol. 2
 
-**Medium**:
+**Medium**
 
 Entre crochets. Les médiums suivants sont identifiés:
 
-- logiciel ;
+- logiciel,
 
-- carte ;
+- carte,
 
-- manuscrit ;
+- manuscrit,
 
-- image ;
+- image,
 
 - s'il existe, le champ "medium" d'une ressource de type graphic, map, manuscript, song remplace ces médiums génériques.
 
@@ -105,7 +109,7 @@ La mention "en ligne" précise les types de medium si une URL ou un DOI est pré
 
 La mention "en ligne" est utilisée seule s'il est impossible de préciser un médium plus précis.
 
-**Dates**:
+**Dates**
 
 la plus complète possible, en fonction des données présentes dans Zotero : "Mois année" pour les articles et "jour mois année" pour les autre ressources, sur le modèle "30 juillet 2014".
 
@@ -113,7 +117,7 @@ En cas de date inconnue: \[s. d.\]
 
 FIXME : Pas de gestion des dates incertaines ni des tranches de dates. Vérifier ce que donnent les dates entre crochets
 
-**Lieux** et **Editeurs**:
+**Lieux** et **Editeurs**
 
 Pour les types de documents book map thesis report chapter entry entry-dictionary entry-encyclopedia, en cas de lieu inconnu: \[s. l.\]. En cas d'éditeur inconnu: \[s. n.\]. En cas de lieu et d'éditeur inconnu : \[s.l. : s.n.\]
 
@@ -139,9 +143,9 @@ La collection et la numérotation sont affichés dans la bibliographie finale, p
 
 Si ces champs sont saisis, ils sont affichés en fin de référence.
 
-**Notes
+**Notes**
 
-Si le champ Extra de Zotero contient des informations, elles sont affichées en tant que notes, en toute fin de référence.
+Si le champ "Extra" de Zotero contient des informations, elles sont affichées en tant que notes, en toute fin de référence.
 
 **Passage précis cité en note**
 
