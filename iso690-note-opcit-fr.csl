@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" demote-non-dropping-particle="never" default-locale="fr-FR">
   <info>
-    <title>ISO-690 (note, no abstract, op.cit, French)</title>
+    <title>ISO-690 (note, no abstract, opcit, French)</title>
     <id>http://www.zotero.org/styles/iso690-note-opcit-fr</id>
     <link href="http://www.zotero.org/styles/iso690-note-opcit-fr" rel="self"/>
     <author>
@@ -21,6 +21,7 @@
       <term name="online">en&#160;ligne</term>
       <term name="accessed">consulté&#160;le</term>
       <term name="available at">disponible à l'adresse</term>
+      <term name="cited">op.&#160;cit.</term>
       <term name="editor" form="short">
 <!-- Dir. (Sous la direction de) = most common term in french for editorial responsability of a collective work-->
         <single>dir.</single>
@@ -149,47 +150,45 @@ Patent main creator should be Zotero "assignee", which is not yet mapped against
           </else>
         </choose>    
       </if>
-      <else-if type="report">
-<!-- Title:Report type n°XXX
-or   Title:Report n°XXX (if no report type)
-or   Title:Report type (if no number)
--->
-        <group delimiter=". ">
-          <text variable="title" font-style="italic"/>
-          <choose>
-            <if variable="number">
-              <choose> 
-                <if variable="genre">
-                  <group delimiter=" ">
-                    <text variable="genre"/>
-                    <text term="issue" form="short"/>
-                  </group>
-                </if>
-                <else>
-                  <group delimiter=" ">
-                    <text value="Rapport"/>
-                    <text term="issue" form="short"/>
-                  </group>
-                </else>
-              </choose>
-              <text variable="number"/>
-            </if>
-            <else-if variable="genre">
-              <text variable="genre"/>
-            </else-if>
-          </choose>
-        </group>
-      </else-if>
-      <else-if type="thesis">
-        <group delimiter=". ">
-          <text variable="title" font-style="italic"/>
-          <text variable="genre"/>
-        </group>
-      </else-if>
       <else>
         <text variable="title" font-style="italic"/>
       </else>
     </choose>
+  </macro>
+  <macro name="thesis-report-genre">
+	<choose>
+      <if type="report">
+<!-- Title:Report type n°XXX
+or   Title:Report n°XXX (if no report type)
+or   Title:Report type (if no number)
+-->
+        <choose>
+          <if variable="number">
+			<choose> 
+              <if variable="genre">
+                <group delimiter=" ">
+                  <text variable="genre"/>
+                  <text term="issue" form="short"/>
+                </group>
+              </if>
+              <else>
+                <group delimiter=" ">
+                  <text value="Rapport"/>
+                  <text term="issue" form="short"/>
+                </group>
+              </else>
+            </choose>
+			<text variable="number"/>
+          </if>
+          <else-if variable="genre">
+            <text variable="genre"/>
+          </else-if>
+        </choose>
+      </if>
+      <else-if type="thesis">
+        <text variable="genre"/>
+      </else-if>
+	</choose>
   </macro>
   <macro name="volume">
 <!-- If the volume field contains "Tome 1, vol. 2", this string is displayed. If it contains only a number, 'vol.' is added before-->
@@ -549,12 +548,13 @@ Uncomment to mention the number of pages of books and monographs
   <macro name="note">
     <text variable="note" text-case="capitalize-first"/>
   </macro>
-  <citation et-al-min="4" et-al-use-first="3">
+  <citation et-al-min="4" et-al-use-first="3" near-note-distance="10">
     <layout suffix="." delimiter="&#8239;; ">
+      <text variable="first-reference-note-number" prefix="ref. "/>
       <choose>
         <if position="ibid-with-locator">
           <group delimiter=", ">
-            <text term="ibid" font-style="italic" suffix="."/>
+            <text term="ibid" font-style="italic"/>
             <group>
               <label variable="locator" form="short" suffix="&#160;"/>
               <text variable="locator"/>
@@ -564,15 +564,48 @@ Uncomment to mention the number of pages of books and monographs
         <else-if position="ibid">
           <text term="ibid" font-style="italic"/>
         </else-if>
-        <else-if position="subsequent">
+        <else-if position="near-note">
           <group delimiter=", ">
-            <text macro="responsability" />
-            <text term="cited" font-style="italic" suffix="."/>
+            <group delimiter=". ">
+              <text macro="responsability" />
+              <text term="cited" font-style="italic"/>
+            </group>
             <group>
               <label variable="locator" form="short" suffix="&#160;"/>
               <text variable="locator"/>
             </group>
           </group>
+        </else-if>
+        <else-if position="subsequent">
+          <group delimiter=". ">
+          <text macro="responsability"/>
+          <group delimiter=" ">
+            <group delimiter=". ">
+              <text macro="title"/>
+<!-- volume : used for books and monographs (a volume of a multivolume book)-->
+              <text macro="volume"/>
+            </group>
+<!-- medium : [online], [map], [software], etc.-->
+            <text macro="medium_designation"/>
+          </group>
+          <text macro="thesis-report-genre"/>
+          <text macro="edition"/>
+          <group delimiter=", ">
+            <group delimiter=". ">
+              <group delimiter="&#8239;: ">
+                <text macro="publisher-place"/>
+                <text macro="publisher"/>
+              </group>
+              <text macro="number"/>
+            </group>
+            <group delimiter=", ">
+              <text macro="date"/>
+              <text macro="numberOfVolumes"/>
+              <text macro="issue-pagination-locator"/>
+            </group>
+          </group>
+          <text macro="note"/>
+        </group>
         </else-if>
         <else>
           <group delimiter=". ">
@@ -586,9 +619,10 @@ Uncomment to mention the number of pages of books and monographs
 <!-- medium : [online], [map], [software], etc.-->
             <text macro="medium_designation"/>
           </group>
-<!-- secondary-responsability : used for patent inventors and translators -->
-          <text macro="edition"/>
-          <text macro="secondary-responsability"/>
+        <text macro="thesis-report-genre"/>
+        <text macro="edition"/>
+<!-- secondary-responsability : used for patent inventors, and translators -->
+        <text macro="secondary-responsability"/>
           <group delimiter=", ">
             <group delimiter=". ">
               <group delimiter="&#8239;: ">
@@ -604,14 +638,12 @@ Uncomment to mention the number of pages of books and monographs
             </group>
           </group>
           <text macro="accessed"/>
-<!--
-Uncomment to cite collection in note
-        <text macro="collection"/>
--->
+          <text macro="collection"/>
           <text macro="isbn"/>
           <text macro="access"/>
           <text macro="note"/>
         </group>
+      </else>
       </choose>
     </layout>
   </citation>
@@ -632,8 +664,9 @@ Uncomment to cite collection in note
 <!-- medium : [online], [map], [software], etc.-->
           <text macro="medium_designation"/>
         </group>
-<!-- secondary-responsability : used for patent inventors and translators -->
+        <text macro="thesis-report-genre"/>
         <text macro="edition"/>
+<!-- secondary-responsability : used for patent inventors, and translators -->
         <text macro="secondary-responsability"/>
         <group delimiter=", ">
           <group delimiter=". ">
