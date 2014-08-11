@@ -455,8 +455,8 @@ FIXME Add a way to manage uncertain dates and range date. limit-day-ordinals-to-
     </group>
   </macro>
   <macro name="locator">
-    <group delimiter="&#160;">
-      <label variable="locator" form="short"/>
+    <group>
+      <label variable="locator" form="short" suffix="&#160;"/>
       <text variable="locator"/>
     </group>
   </macro>
@@ -614,7 +614,7 @@ Uncomment to mention the number of pages of books and monographs
         <group delimiter=", ">
           <text macro="date"/>
           <text macro="numberOfVolumes"/>
-     <!--     <text macro="issue-pagination-locator"/> -->
+          <text macro="issue-pagination-locator"/>
         </group>
       </group> 
       <text macro="accessed"/>
@@ -631,7 +631,7 @@ Uncomment to mention the number of pages of books and monographs
           <group delimiter=", ">
             <text term="ibid" font-style="italic"/>
             <text macro="locator"/>
-          </group>
+              </group>
         </if>
         <else-if position="ibid">
           <text term="ibid" font-style="italic"/>
