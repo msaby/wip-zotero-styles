@@ -36,6 +36,7 @@ Les éléments obligatoires dans tous les cas de figure selon la norme sont en *
 Ressource non incluse dans une ressource hôte:
 
 **NOM, Prénom des créateurs principaux (fonction)**. ***Titre***. Volume \[Medium\]. Type de rapport n° Numéro de rapport. Type de thèse. **Mention d'édition**. Fonction des créateurs secondaires Prénom NOM des créateurs secondaires. **Lieu** : **Editeur**. Numéro (brevets uniquement). **Date**. **\[Consulté le Date d'accès\]**. Collection. **ISBN**. **URL ou DOI**. Archive : localisation ou cote. Notes
+
 Ressource incluse dans une ressource hôte
 
 **NOM, Prénom des créateurs principaux (fonction)**. **Titre**. Dans : **CREATEURS DE LA RESSOURCE HÔTE**. ***Titre***. Volume \[Medium\]. **Mention d'édition**. Fonction des créateurs secondaires Prénom NOM des créateurs secondaires. **Lieu** : **Editeur**. **Date**. **\[Consulté le Date d'accès\]**. Collection. **ISBN**. **URL ou DOI**. Archive : localisation ou cote. Notes
@@ -155,22 +156,21 @@ Le passage précis n'est pas indiqué dans la bibliographie.
 
 Ex 1: (citation de la page 226)
 
-note : SELMI, Adel et JOLY, Pierre-Benoit. Les régimes de production des connaissances de la sélection animale. Ontologies, mesures, formes de régulation. ''Sociologie du Travail''. Avril 2014, Vol. 56, no 2, p. 226. DOI 10.1016/j.soctra.2014.03.020.
+note : SELMI, Adel et JOLY, Pierre-Benoit. Les régimes de production des connaissances de la sélection animale. Ontologies, mesures, formes de régulation. *Sociologie du Travail*. Avril 2014, Vol. 56, no 2, p. 226. DOI 10.1016/j.soctra.2014.03.020.
 
-
-bibliographie : SELMI, Adel et JOLY, Pierre-Benoit. Les régimes de production des connaissances de la sélection animale. Ontologies, mesures, formes de régulation. ''Sociologie du Travail''. Avril 2014, Vol. 56, no 2, p. 225‑244. DOI 10.1016/j.soctra.2014.03.020.
+bibliographie : SELMI, Adel et JOLY, Pierre-Benoit. Les régimes de production des connaissances de la sélection animale. Ontologies, mesures, formes de régulation. *Sociologie du Travail*. Avril 2014, Vol. 56, no 2, p. 225‑244. DOI 10.1016/j.soctra.2014.03.020.
 
 Ex 2: (citation du chapitre 2)
 
-note : ROCHE, Florence et SABY, Frédéric (dir.). L’avenir des bibliothèques: l’exemple des bibliothèques universitaires. Villeurbanne : Presses de l’Enssib, 2013, chap. 2. ISBN 979-10-91281-13-3.
+note : ROCHE, Florence et SABY, Frédéric (dir.). *L’avenir des bibliothèques: l’exemple des bibliothèques universitaires*. Villeurbanne : Presses de l’Enssib, 2013, chap. 2. ISBN 979-10-91281-13-3.
 
-bibliographie : ROCHE, Florence et SABY, Frédéric (dir.). L’avenir des bibliothèques: l’exemple des bibliothèques universitaires. Villeurbanne : Presses de l’Enssib, 2013. ISBN 979-10-91281-13-3.
+bibliographie : ROCHE, Florence et SABY, Frédéric (dir.). *L’avenir des bibliothèques: l’exemple des bibliothèques universitaires*. Villeurbanne : Presses de l’Enssib, 2013. ISBN 979-10-91281-13-3.
 
 Ex 3: (citation de la figure 3)
 
-note : BENTON, Arthur et ANDERSON, Steven W. Aphasia: Historical Perspectives. Dans : SARNO, Martha Taylor (dir.), ''Acquired Aphasia''. 3e édition \[en ligne\]. San Diego : Academic Press, 1998, fig. 4. \[Consulté le 27 juillet 2014\]. ISBN 978-0-12-619322-0.
+note : BENTON, Arthur et ANDERSON, Steven W. Aphasia: Historical Perspectives. Dans : SARNO, Martha Taylor (dir.), *Acquired Aphasia*. 3e édition \[en ligne\]. San Diego : Academic Press, 1998, fig. 4. \[Consulté le 27 juillet 2014\]. ISBN 978-0-12-619322-0.
 
-bibliographie : BENTON, Arthur et ANDERSON, Steven W. Aphasia: Historical Perspectives. Dans : SARNO, Martha Taylor (dir.), ''Acquired Aphasia''. 3e édition \[en ligne\]. San Diego : Academic Press, 1998, p. 1‑24. \[Consulté le 27 juillet 2014\]. ISBN 978-0-12-619322-0.
+bibliographie : BENTON, Arthur et ANDERSON, Steven W. Aphasia: Historical Perspectives. Dans : SARNO, Martha Taylor (dir.), *Acquired Aphasia*. 3e édition \[en ligne\]. San Diego : Academic Press, 1998, p. 1‑24. \[Consulté le 27 juillet 2014\]. ISBN 978-0-12-619322-0.
 
 **Tri de la bibliographie**
 
@@ -183,12 +183,22 @@ Style compatible avec la norme ISO 690, permettant des citations en notes, avec 
 
 La norme ne prévoit pas l'usage de "ibid" et "op. cit.", mais il est répandu en France.
 
+Style identique à iso690-note-fr, excepté pour la construction des références dans les notes:
+
 4 types de références dans les citations en note:
 
 - 1re occurrence : référence complète (identique à la référence donnée en bibliographie)
 
+Exemple: NOM, Prénom des créateurs principaux (fonction). *Titre*. Volume \[Medium\]. Type de rapport n° Numéro de rapport. Type de thèse. Mention d'édition. Fonction des créateurs secondaires Prénom NOM des créateurs secondaires. Lieu : Editeur. Numéro (brevets uniquement). Date. \[Consulté le Date d'accès\]. Collection. ISBN. URL ou DOI. Archive : localisation ou cote. Notes
+
 - occurrences suivantes : référence simplifiée (sans auteurs secondaires, collections, isbn, doi, url, date d'accès, archive et cote, notes)
+
+Exemple: NOM, Prénom des créateurs principaux (fonction). *Titre*. Volume \[Medium\]. Type de rapport n° Numéro de rapport. Type de thèse. Mention d'édition. Lieu : Editeur. Numéro (brevets uniquement). Date
 
 - ibid. : référence citée dans la note précédente
 
+Exemple: Ibid., p. 34.
+
 - op. cit. : référence citée dans une note proche (une des 5 dernières notes)
+
+Exemple: Op. cit., p. 34.
